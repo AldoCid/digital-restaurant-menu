@@ -66,6 +66,7 @@ GEM
       pry-rails
       pry-stack_explorer
     awesome_print (1.8.0)
+    bcrypt (3.1.16)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
     bootsnap (1.4.9)
@@ -78,6 +79,12 @@ GEM
       unicode_utils (~> 1.4)
     crass (1.0.6)
     debug_inspector (0.0.3)
+    devise (4.7.3)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0)
+      responders
+      warden (~> 1.2.3)
     diff-lcs (1.4.4)
     dotenv (2.7.6)
     dotenv-rails (2.7.6)
@@ -108,6 +115,7 @@ GEM
     nio4r (2.5.4)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
+    orm_adapter (0.5.0)
     parallel (1.19.2)
     parser (2.7.2.0)
       ast (~> 2.4.1)
@@ -165,6 +173,9 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (1.8.2)
+    responders (3.0.1)
+      actionpack (>= 5.0)
+      railties (>= 5.0)
     rexml (3.2.4)
     rspec-core (3.9.3)
       rspec-support (~> 3.9.3)
@@ -212,6 +223,8 @@ GEM
       thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
     unicode_utils (1.4.0)
+    warden (1.2.9)
+      rack (>= 2.0.9)
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -224,6 +237,7 @@ PLATFORMS
 DEPENDENCIES
   awesome-pry
   bootsnap (>= 1.4.2)
+  devise (>= 4.0)
   dotenv-rails
   listen (~> 3.2)
   pg (~> 1.2.3)
