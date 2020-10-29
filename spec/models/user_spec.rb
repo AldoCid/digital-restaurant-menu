@@ -4,25 +4,16 @@ require 'rails_helper'
 
 describe User, type: :model do
   context '.create' do
-    let(:customer_example) do
-      {
-        name: 'Mac Demarco',
-        email: 'mac@indie.com',
-        phone: '8566669999',
-        address: 'Rua dos Pinheiros'
-      }
-    end
+    let!(:customer_example) { create(:user) }
 
-    it 'creates customer user by default' do
-      new_user = User.create(customer_example)
-      expect(new_user.customer?).to be_truthy
-    end
-
+    it { expect(customer_example.customer?).to be_truthy }
     it {
       expect(User.create.errors.messages).to eq({
                                                   email: ["can't be blank"],
                                                   password: ["can't be blank"]
                                                 })
     }
+
+    it { expect(customer_example.products).to eq([]) }
   end
 end
