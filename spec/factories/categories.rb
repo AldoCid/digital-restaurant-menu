@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :category do
-    name { "breakfast" }
+    name { "Breakfast" }
+    user { create(:user) }
   end
 end

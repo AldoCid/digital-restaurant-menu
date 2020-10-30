@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :product do
-    title { "Brigadeiro" }
-    description { "Delicious Brazillian dessert" }
-    price { 1.0 }
+    title { Faker::Food.dish }
+    description { Faker::Food.description }
+    price { 10.0 }
   end
 end
