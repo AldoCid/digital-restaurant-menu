@@ -14,7 +14,7 @@ RSpec.describe Product, type: :model do
       }
     end
 
-    subject { Product.create(data) }
+    subject { described_class.create(data) }
 
     it 'creates a new product record' do
       expect { subject }.to change { Product.count }.by(1)

@@ -15,5 +15,6 @@ describe User, type: :model do
     }
 
     it { expect(customer_example.products).to eq([]) }
+    it { expect(customer_example.categories).to eq([]) }
   end
 end
