@@ -235,8 +235,24 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.0.1)
     thread_safe (0.3.6)
+    trailblazer-activity (0.11.3)
+      trailblazer-context (>= 0.3.1, < 0.4.0)
+    trailblazer-activity-dsl-linear (0.3.2)
+      trailblazer-activity (>= 0.11.2, < 1.0.0)
+    trailblazer-context (0.3.1)
+      hashie (~> 4.1)
+    trailblazer-developer (0.0.16)
+      hirb
+      representable
+      trailblazer-activity (>= 0.11.0, < 1.0.0)
+      trailblazer-activity-dsl-linear
+    trailblazer-operation (0.6.5)
+      trailblazer-activity (>= 0.11.2, < 1.0.0)
+      trailblazer-activity-dsl-linear (>= 0.3.2, < 1.0.0)
+      trailblazer-developer (>= 0.0.8)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
+    uber (0.1.0)
     unicode-display_width (1.7.0)
     unicode_utils (1.4.0)
     warden (1.2.9)
@@ -266,6 +282,7 @@ DEPENDENCIES
   rubocop (~> 1.0)
   spring
   spring-watcher-listen (~> 2.0.0)
+  trailblazer-operation
   tzinfo-data
 
 RUBY VERSION
