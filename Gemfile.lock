@@ -78,7 +78,10 @@ GEM
     coolline (0.5.0)
       unicode_utils (~> 1.4)
     crass (1.0.6)
+    database_cleaner (1.8.5)
     debug_inspector (0.0.3)
+    declarative (0.0.20)
+    declarative-option (0.1.0)
     devise (4.7.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -101,6 +104,8 @@ GEM
     ffi (1.13.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    hashie (4.1.0)
+    hirb (0.7.3)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     listen (3.2.1)
@@ -180,6 +185,10 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (1.8.2)
+    representable (3.0.4)
+      declarative (< 0.1.0)
+      declarative-option (< 0.2.0)
+      uber (< 0.2.0)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -244,6 +253,7 @@ PLATFORMS
 DEPENDENCIES
   awesome-pry
   bootsnap (>= 1.4.2)
+  database_cleaner
   devise (>= 4.0)
   dotenv-rails
   factory_bot_rails
