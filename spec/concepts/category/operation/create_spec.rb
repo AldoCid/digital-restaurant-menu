@@ -3,20 +3,17 @@ require 'rails_helper'
 RSpec.describe Category::Create, type: :operation do
   let!(:user) { create(:user) }
   let(:params) {{
-    name: 'Breakfast',
-    user: user
+    name: 'Breakfast'
   }}
 
-  subject { described_class.(params: params) }
+  subject { described_class.(params: params, user: user) }
 
   it 'validates presence of user' do
-    params[:user] = nil
-
-    result = subject
+    result = described_class.(params: params, user: nil)
 
     expect(result.success?).to be_falsey
-    expect(result[:'contract.default'].errors.messages).to have_key(:user)
-    expect(result[:'contract.default'].errors.messages[:user]).to include("can't be blank")
+    expect(result['model'].persisted?).to be_falsey
+    expect(result['option_errors']).to include("user can't be blank")
   end
 
   it 'validates presence of name' do

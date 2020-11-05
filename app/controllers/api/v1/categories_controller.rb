@@ -9,12 +9,19 @@ class Api::V1::CategoriesController < Api::ApiController
   end
 
   def create
-    new_category = Category.new(name: category_params[:name], user: current_user )
-    if new_category.save
-      render json: new_category, status: :ok
-    else
-      render json: new_category.errors, status: :unprocessable_entity
-    end
+    require 'pry'; binding.pry
+    result = run Category::Create.(params: category_params, user: current_user )
+
+    render json: result["model"], status: :ok if result.success?
+
+    render json: @form.errors.messages, status: :unprocessable_entity
+
+    # new_category = Category.new(name: category_params[:name], user: current_user )
+    # if new_category.save
+    #   render json: new_category, status: :ok
+    # else
+    #   render json: new_category.errors, status: :unprocessable_entity
+    # end
   end
 
   def update
@@ -30,6 +37,6 @@ class Api::V1::CategoriesController < Api::ApiController
   private
 
   def category_params
-    params.require(:category).permit(:name)
+    params.permit(:name)
   end
 end
