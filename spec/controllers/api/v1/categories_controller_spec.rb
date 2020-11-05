@@ -23,7 +23,7 @@ describe Api::V1::CategoriesController, type: :controller do
   end
 
   context 'POST create' do
-    let(:params) {{ category: { name: 'dessert'} }}
+    let(:params) {{ name: 'dessert'}}
 
     subject { post :create, params: params }
 
@@ -38,9 +38,7 @@ describe Api::V1::CategoriesController, type: :controller do
     let(:category) { create(:category) }
     let(:params) {{
       id: category.id,
-      category: {
-        name: 'Dinner'
-      }
+      name: 'Dinner'
     }}
 
     subject { put :update, params: params }

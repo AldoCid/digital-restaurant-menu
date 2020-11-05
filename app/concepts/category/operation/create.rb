@@ -13,7 +13,7 @@ class Category::Create < Trailblazer::Operation
   end
 
   def assign_user!(options, user:, **)
-    options["model"].user = options["user"]
+    options["model"].user = user
 
     options["user"] != nil
   end
