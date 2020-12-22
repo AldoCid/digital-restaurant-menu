@@ -22,11 +22,15 @@ class Api::V1::CategoriesController < Api::ApiController
   end
 
   def update
-    category = Category.find(params[:id])
-    if category.update(category_params)
-      render json: category, status: :ok
+    result = Category::Update.(
+      id: params[:id],
+      params: category_params
+    )
+
+    if result.success?
+      render json: result["model"], status: :ok
     else
-      render json: category.errors, status: :unprocessable_entity
+      render json: result[:'contract.default'].errors, status: :unprocessable_entity
     end
   end
 
