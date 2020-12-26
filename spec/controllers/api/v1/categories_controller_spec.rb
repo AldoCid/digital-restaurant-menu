@@ -30,8 +30,18 @@ describe Api::V1::CategoriesController, type: :controller do
     it { expect(subject).to have_http_status(200) }
     it { expect(JSON.parse(subject.body).except('created_at', 'updated_at', 'id')).to eq({
       'name' => 'dessert',
-      'user_id'=> user.id
+      'user_id'=> user.id,
+      'active' => true
       })}
+
+    it 'render error for empty name' do
+      params[:name] = nil
+
+      response = subject
+
+      expect(response).to have_http_status(422)
+      expect(JSON.parse(response.body)).to eq({"name"=>["can't be blank"]})
+    end
   end
 
   context 'PUT update' do
@@ -46,7 +56,36 @@ describe Api::V1::CategoriesController, type: :controller do
     it { expect(subject).to have_http_status(200) }
     it { expect(JSON.parse(subject.body).except('created_at', 'updated_at', 'id')).to eq({
       'name' => 'Dinner',
-      'user_id'=> user.id
+      'user_id'=> user.id,
+      'active' => true
       })}
+
+    it 'return erro if category is not found' do
+      params[:id] = 10000
+
+      expect(subject).to have_http_status(422)
+    end
   end
+
+    # context 'PUT inactive' do
+    #   let(:caterogy) { create(:category) }
+    #   let(:products) { create_list(:products, 5, category: category) }
+    #   let(:pamras) {{ id: category.id }}
+
+    #   subject { put :inactive, params: {id: category.id} }
+
+    #   it { expect(subject).to have_http_status(200) }
+    #   it { expect(JSON.parse(subject.body).except('created_at', 'updated_at', 'id')).to eq({
+    #     'name' => category.name,
+    #     'active' => false
+    #     })}
+    #   it 'inactive all products from category' do
+    #     subject
+    #     expect(category.products.changed?).to be_truthy
+    #   end
+
+    # end
+
+    context 'PUT active' do
+    end
 end

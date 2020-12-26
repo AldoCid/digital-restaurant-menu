@@ -9,29 +9,32 @@ class Api::V1::CategoriesController < Api::ApiController
   end
 
   def create
-    result = Category::Create.(
+    Services::Category::Create.call(
       params: category_params,
       user: current_user
     )
-
-    if result.success?
-      render json: result["model"], status: :ok
-    else
-      render json: result[:'contract.default'].errors, status: :unprocessable_entity
-    end
+    .on_success { |result| render json: result.data[:category], status: :ok }
+    .on_failure { |result| render json: result.data[:error], status: :unprocessable_entity }
   end
 
   def update
-    result = Category::Update.(
+    Services::Category::Update.call(
       id: params[:id],
       params: category_params
     )
+    .on_success { |result| render json: result.data[:category], status: :ok }
+    .on_failure { |result| render json: result.data[:error], status: :unprocessable_entity }
 
-    if result.success?
-      render json: result["model"], status: :ok
-    else
-      render json: result[:'contract.default'].errors, status: :unprocessable_entity
-    end
+    # result = Category::Update.(
+    #   id: params[:id],
+    #   params: category_params
+    # )
+
+    # if result.success?
+    #   render json: result["model"], status: :ok
+    # else
+    #   render json: result[:'contract.default'].errors, status: :unprocessable_entity
+    # end
   end
 
 

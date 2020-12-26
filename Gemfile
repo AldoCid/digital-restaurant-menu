@@ -8,10 +8,7 @@ gem 'pg', '~> 1.2.3'
 gem 'puma', '~> 4.1'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise', '>= 4.0'
-gem 'trailblazer-rails'
-gem "reform", ">= 2.2.0"
-gem "reform-rails"
-
+gem 'u-case', '~> 4.1.0'
 
 group :development, :test do
   gem 'awesome-pry'
