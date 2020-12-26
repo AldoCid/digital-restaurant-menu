@@ -23,7 +23,8 @@ RSpec.describe Product, type: :model do
                                                                                        'description' => 'Delicious Brazillian dessert',
                                                                                        'price' => 1.0,
                                                                                        'user_id' => 1,
-                                                                                       'category_id' => 1
+                                                                                       'category_id' => 1,
+                                                                                       'active' => true
                                                                                      })
     end
 

@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2020_10_30_182232) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
+    t.boolean "active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
@@ -27,6 +28,7 @@ ActiveRecord::Schema.define(version: 2020_10_30_182232) do
     t.string "title"
     t.string "description"
     t.float "price"
+    t.boolean "active", default: true
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
