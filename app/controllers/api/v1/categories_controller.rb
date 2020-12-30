@@ -24,19 +24,7 @@ class Api::V1::CategoriesController < Api::ApiController
     )
     .on_success { |result| render json: result.data[:category], status: :ok }
     .on_failure { |result| render json: result.data[:error], status: :unprocessable_entity }
-
-    # result = Category::Update.(
-    #   id: params[:id],
-    #   params: category_params
-    # )
-
-    # if result.success?
-    #   render json: result["model"], status: :ok
-    # else
-    #   render json: result[:'contract.default'].errors, status: :unprocessable_entity
-    # end
   end
-
 
   private
 
