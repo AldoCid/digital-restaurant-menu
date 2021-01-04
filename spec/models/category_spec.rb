@@ -30,15 +30,23 @@ RSpec.describe Category, type: :model do
   end
 
   context '.update' do
-    context 'when update active column' do
-      let!(:category) { create(:category)}
-      let!(:products) { create_list(:product, 5, category: category, user: category.user)}
-      let!(:service) { Services::Category::Products::FlipActivation }
+    let!(:category) { create(:category)}
+    let!(:products) { create_list(:product, 5, category: category, user: category.user)}
+    let!(:service) { Services::Category::Products::FlipActivation }
 
+    context 'when update active column' do
       it 'calls Services::Category::Products::FlipActivation service' do
         expect(service).to receive(:call)
 
         category.update(active: false)
+      end
+    end
+
+    context 'when update another fields' do
+      it 'skip Services::Category::Products::FlipActivation call' do
+        expect(service).not_to receive(:call)
+
+        category.update(name: 'Dinner')
       end
     end
   end

@@ -4,9 +4,9 @@ class Category < ApplicationRecord
 
   validates :name, presence: true
 
-  after_update :flip_products if :active_changed?
+  after_save :flip_products_activation
 
-  def flip_products
-    Services::Category::Products::FlipActivation.call(category: self)
+  def flip_products_activation
+    Services::Category::Products::FlipActivation.call(category: self) if saved_change_to_active?
   end
 end
