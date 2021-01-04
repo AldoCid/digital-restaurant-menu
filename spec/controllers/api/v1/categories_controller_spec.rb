@@ -60,32 +60,10 @@ describe Api::V1::CategoriesController, type: :controller do
       'active' => true
       })}
 
-    it 'return erro if category is not found' do
+    it 'return error if category is not found' do
       params[:id] = 10000
 
       expect(subject).to have_http_status(422)
     end
   end
-
-    # context 'PUT inactive' do
-    #   let(:caterogy) { create(:category) }
-    #   let(:products) { create_list(:products, 5, category: category) }
-    #   let(:pamras) {{ id: category.id }}
-
-    #   subject { put :inactive, params: {id: category.id} }
-
-    #   it { expect(subject).to have_http_status(200) }
-    #   it { expect(JSON.parse(subject.body).except('created_at', 'updated_at', 'id')).to eq({
-    #     'name' => category.name,
-    #     'active' => false
-    #     })}
-    #   it 'inactive all products from category' do
-    #     subject
-    #     expect(category.products.changed?).to be_truthy
-    #   end
-
-    # end
-
-    context 'PUT active' do
-    end
 end
