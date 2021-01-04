@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'json'
 
 describe Api::V1::CategoriesController, type: :controller do
   let(:category) { create(:category) }
