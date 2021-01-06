@@ -9,16 +9,12 @@ class Api::V1::ProductsController < Api::ApiController
   end
 
   def create
-    product = Product.new.tap do |p|
-      p.assign_attributes(product_params)
-      p.user = current_user
-    end
-
-    if product.save
-      render json: product.to_json, status: :ok
-    else
-      render json: product.errors, status: :unprocessable_entity
-    end
+    Services::Product::Create.call(
+      params: product_params,
+      user_id: current_user.id
+    )
+    .on_success { |result| render json: result.data[:product], status: :ok }
+    .on_failure { |result| render json: result.data[:error], status: :unprocessable_entity}
   end
 
   def update

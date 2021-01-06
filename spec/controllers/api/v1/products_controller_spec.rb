@@ -34,14 +34,16 @@ describe Api::V1::ProductsController, type: :controller do
 
     subject { post :create, params: params }
 
-    it { expect(JSON.parse(subject.body).except('id', 'created_at', 'updated_at')).to eq({
-      "title"=>'Cheeseburger',
-      "description"=>'Delicious burger with cheese and bread',
-      "price"=> 5.0,
-      "active"=>true,
-      "category_id"=> category.id,
-      "user_id"=> user.id
-    }) }
+    it 'returns persisted object' do
+      expect(JSON.parse(subject.body).except('id', 'created_at', 'updated_at')).to eq({
+        "title"=>'Cheeseburger',
+        "description"=>'Delicious burger with cheese and bread',
+        "price"=> 5.0,
+        "active"=>true,
+        "category_id"=> category.id,
+        "user_id"=> user.id
+      })
+    end
 
     it 'validates title and category presence' do
       params[:title], params[:price], params[:category_id] = nil
