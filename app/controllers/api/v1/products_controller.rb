@@ -5,7 +5,12 @@ class Api::V1::ProductsController < Api::ApiController
   end
 
   def show
-    render json: Product.find(params[:id]), status: :ok
+    Services::Find.call(
+      model: Product,
+      id: params[:id]
+    )
+    .on_success { |result| render json: result.data[:record], status: :ok }
+    .on_failure { |result| render json: result.data[:error], status: :not_found }
   end
 
   def create
