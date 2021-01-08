@@ -41,6 +41,12 @@ describe Api::V1::CategoriesController, type: :controller do
       expect(response).to have_http_status(422)
       expect(JSON.parse(response.body)).to eq({"name"=>["can't be blank"]})
     end
+
+    it 'ignores unsupported params' do
+      params[:unsupported_param] = '123'
+
+      expect(subject).to have_http_status(200)
+    end
   end
 
   context 'PUT update' do

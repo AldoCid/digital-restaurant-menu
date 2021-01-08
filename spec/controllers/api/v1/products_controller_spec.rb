@@ -55,6 +55,12 @@ describe Api::V1::ProductsController, type: :controller do
         "category"=>["must exist"]
       })
     end
+
+    it 'ignores unsupported params' do
+      params[:unsupported_param] = '123'
+
+      expect(subject).to have_http_status(200)
+    end
   end
 
   context 'PUT update' do

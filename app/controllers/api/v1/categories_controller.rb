@@ -14,11 +14,11 @@ class Api::V1::CategoriesController < Api::ApiController
   end
 
   def create
-    Services::Category::Create.call(
-      params: category_params,
-      user: current_user
+    Services::Create.call(
+      model: Category,
+      params: category_params.merge({user_id: current_user.id}),
     )
-    .on_success { |result| render json: result.data[:category], status: :ok }
+    .on_success { |result| render json: result.data[:record], status: :ok }
     .on_failure { |result| render json: result.data[:error], status: :unprocessable_entity }
   end
 

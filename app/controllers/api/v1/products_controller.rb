@@ -14,11 +14,11 @@ class Api::V1::ProductsController < Api::ApiController
   end
 
   def create
-    Services::Product::Create.call(
-      params: product_params,
-      user_id: current_user.id
+    Services::Create.call(
+      model: Product,
+      params: product_params.merge({user_id: current_user.id}),
     )
-    .on_success { |result| render json: result.data[:product], status: :ok }
+    .on_success { |result| render json: result.data[:record], status: :ok }
     .on_failure { |result| render json: result.data[:error], status: :unprocessable_entity}
   end
 
