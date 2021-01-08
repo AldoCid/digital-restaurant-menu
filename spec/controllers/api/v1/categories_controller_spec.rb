@@ -68,7 +68,17 @@ describe Api::V1::CategoriesController, type: :controller do
     it 'return error if category is not found' do
       params[:id] = 10000
 
-      expect(subject).to have_http_status(422)
+      expect(subject).to have_http_status(404)
+      expect(subject.body).to eq("Category not found with id: 10000")
+    end
+
+    it 'render error for empty name' do
+      params[:name] = nil
+
+      response = subject
+
+      expect(response).to have_http_status(422)
+      expect(JSON.parse(response.body)).to eq({"name"=>["can't be blank"]})
     end
   end
 end

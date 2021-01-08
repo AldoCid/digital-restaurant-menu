@@ -23,16 +23,14 @@ class Api::V1::ProductsController < Api::ApiController
   end
 
   def update
-    begin
-      product = Product.find(params[:id])
-      if product.update(update_product_params)
-        render json: product.to_json, status: :ok
-      else
-        render json: product.errors, status: :unprocessable_entity
-      end
-    rescue StandardError => e
-      render json: {error: e}, status: :unprocessable_entity
-    end
+    Services::Flows::FindAndUpdate.call(
+      id: params[:id],
+      model: Product,
+      params: update_product_params
+    )
+    .on_success { |result| render json: result.data[:record], status: :ok }
+    .on_failure(:not_found) { |data| render json: data[:error], status: :not_found }
+    .on_failure(:update_failure) { |data| render json: data[:error], status: :unprocessable_entity }
   end
 
   private

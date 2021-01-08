@@ -23,12 +23,14 @@ class Api::V1::CategoriesController < Api::ApiController
   end
 
   def update
-    Services::Category::Update.call(
+    Services::Flows::FindAndUpdate.call(
       id: params[:id],
+      model: Category,
       params: category_params
     )
-    .on_success { |result| render json: result.data[:category], status: :ok }
-    .on_failure { |result| render json: result.data[:error], status: :unprocessable_entity }
+    .on_success { |result| render json: result.data[:record], status: :ok }
+    .on_failure(:not_found) { |data| render json: data[:error], status: :not_found }
+    .on_failure(:update_failure) { |data| render json: data[:error], status: :unprocessable_entity }
   end
 
   private

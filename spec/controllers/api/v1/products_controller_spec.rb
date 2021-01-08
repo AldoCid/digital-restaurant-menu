@@ -98,8 +98,8 @@ describe Api::V1::ProductsController, type: :controller do
     it 'return error if product is not found' do
       params[:id] = 10000
 
-      expect(subject).to have_http_status(422)
-      expect(JSON.parse(subject.body)).to eq({"error"=> "Couldn't find Product with 'id'=10000"})
+      expect(subject).to have_http_status(404)
+      expect(subject.body).to eq("Product not found with id: 10000")
     end
   end
 end
