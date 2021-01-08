@@ -3,10 +3,9 @@ class Services::Find < Micro::Case
 
   def call!
     record = model.find_by(id: id)
-    if record
-      Success result: { record: record }
-    else
-      Failure :not_found, result: { error: "#{model} not found with id: #{id}" }
-    end
+
+    return Success result: { record: record } if record
+
+    Failure :not_found, result: { error: "#{model} not found with id: #{id}" }
   end
 end

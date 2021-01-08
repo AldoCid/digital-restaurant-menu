@@ -4,11 +4,10 @@ class Services::Create < Micro::Case
   def call!
     begin
       record = model.new(params)
-      if record.save
-        Success result: {record: record}
-      else
-        Failure result: {error: record.errors}
-      end
+
+      return Success result: {record: record} if record.save
+
+      Failure result: {error: record.errors}
     rescue StandardError => e
       Failure result: {error: e.to_s}
     end
