@@ -6,7 +6,7 @@ class Services::Find < Micro::Case
     if record
       Success result: { record: record }
     else
-      Failure result: { error: "#{model} not found with id: #{id}" }
+      Failure :not_found, result: { error: "#{model} not found with id: #{id}" }
     end
   end
 end
